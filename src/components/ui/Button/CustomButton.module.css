@@ -1,0 +1,15 @@
+.btn_primary {
+    @apply flex justify-center items-center text-center text-white font-medium rounded-md px-[0.875rem];
+}
+
+.btn_secundary {
+    @apply flex justify-center items-center text-gray-700 bg-secondary font-medium rounded-lg  px-[1.25rem]  hover:bg-secondaryHover;
+}
+
+.btn_select_date_primary {
+    @apply h-[2.1875rem] px-[0.625rem] text-[0.8125rem] font-medium text-indigo-600 bg-indigo-50 border border-indigo-600 rounded-lg;
+}
+
+.btn_select_date_secundary {
+    @apply h-[2.1875rem] px-[0.625rem] text-[0.8125rem] font-medium text-gray-600 bg-white border border-gray-400/50 rounded-lg hover:bg-gray-50;
+}

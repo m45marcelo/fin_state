@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* container do calendário */
+.vc {
+    background-color: #1f2937; /* fundo escuro */
+    color: #f9fafb;            /* texto claro */
+    border-radius: 8px;
+  }
+  
+  /* texto do mês e ano */
+  .vc-header__content {
+    font-weight: bold;
+    color: #3b82f6;
+  }
+  
+  /* dia */
+  .vc-date__btn {
+    background-color: transparent;
+    color: #f1f10b;
+    border-radius: 4px;
+  }
+  
+  /* hoje */
+  .vc-date__btn[data-vc-date="today"] {
+    background: #44b9ef;
+    color: white;
+  }
+  
+  /* selecionados */
+  .vc-date__btn[data-vc-selected] {
+    background: #3b82f6;
+    color: white;
+  }
+  
+  /* hover no dia */
+  .vc-date__btn:hover {
+    background: #2563eb;
+    color: white;
+  }
+  
+
+select {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url('/assets/icons/dropdown-arrow.svg');
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.3125rem 1.3125rem;
+    padding-right: 2.5rem;
+}
+
+
+thead{
+    background-color: rgb(249 250 251);
+    height: 36px;
+    
+}
+
+tbody tr{
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+@layer utilities {
+    /* =========================
+        HEADINGS
+    ========================== */
+    .h1 {
+        @apply text-2xl text-gray-800 font-medium; /* 36px - Título principal */
+    }
+    .h2 {
+        @apply text-gray-800 flex items-center font-semibold; /* 30px - Seções */
+    }
+
+    /* =========================
+       BODY TEXT
+    ========================== */
+    .body {
+        @apply text-base font-normal text-gray-800; /* 16px - Texto padrão */
+    }
+    .body-sm {
+        @apply text-sm font-normal text-gray-700; /* 14px - Texto secundário */
+    }
+    .caption {
+        @apply text-xs font-normal text-gray-500; /* 12px - Legendas */
+    }
+
+    /* =========================
+       NUMBERS & VALUES
+    ========================== */
+    .value-lg {
+        @apply text-2xl font-semibold text-gray-900; /* 24px - Valores principais */
+    }
+    .value-md {
+        @apply text-lg font-medium text-gray-800; /* 18px - Valores médios */
+    }
+    .value-sm {
+        @apply text-sm font-normal text-gray-700; /* 14px - Detalhes de transações */
+    }
+
+    /* =========================
+       BUTTONS
+    ========================== */
+    .btn-text {
+        @apply text-sm font-medium uppercase tracking-wide; /* 14px - Botões */
+    }
+
+    /* =========================
+       ICONS
+    ========================== */
+    .icon-sm {
+        @apply text-sm; /* 14px */
+    }
+    .icon-md {
+        @apply text-base; /* 16px */
+    }
+    .icon-lg {
+        @apply text-xl; /* 20px */
+    }
+
+    .card-info {
+        @apply w-[15.5625rem] h-[6.0625rem] shadow-[0_4px_6px_-1px_rgba(0,_0,_0,_0.1)];
+    }
+}
