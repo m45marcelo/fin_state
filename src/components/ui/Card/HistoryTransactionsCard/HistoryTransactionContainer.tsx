@@ -18,7 +18,13 @@ export const HistoryTransactionsContainer = () => {
 	const { data: expenseData } = useGetAllExpensesQuery();
 	const { data: subscriptionData } = useGetAllSubscriptionsQuery();
 
-	if (incomeData && expenseData && subscriptionData) {
+	console.log("teste", incomeData, expenseData, subscriptionData)
+
+	const incomeDataTrue = incomeData?.incomes ? incomeData.incomes : undefined;
+	const expenseDataTrue = expenseData?.expenses ? expenseData.expenses : undefined;
+	const subscriptionDataTrue = subscriptionData?.subscriptions ? subscriptionData.subscriptions : undefined;
+
+	if (incomeDataTrue && expenseDataTrue && subscriptionDataTrue) {
 		return (
 			<div className="bg-white flex flex-col w-full max-w-[79.9375rem]  mb-[21px] gap-[1.3125rem] p-[1.3125rem] justify-center shadow-[0_4px_6px_-1px_rgba(0,_0,_0,_0.1)] rounded-2xl">
 				<div className="flex justify-between">
@@ -29,12 +35,12 @@ export const HistoryTransactionsContainer = () => {
 						</CustomText>
 					</Link>
 				</div>
-				{incomeData.incomes.length <= 0 ||
-				expenseData.expenses.length <= 0 ||
-				subscriptionData.subscriptions.length <= 0 ? (
-					<HistoryTransactionsList />
-				) : (
+				{incomeDataTrue.length <= 0 ||
+				expenseDataTrue.length <= 0 ||
+				subscriptionDataTrue.length <= 0 ? (
 					<NotTransaction />
+				) : (
+					<HistoryTransactionsList />
 				)}
 			</div>
 		);
