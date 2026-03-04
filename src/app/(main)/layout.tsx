@@ -4,6 +4,8 @@ import { ModalAddSubscriptionCard } from "@/components/ui/Modal/ModalAddSubscrip
 import { ModalAuth } from "@/components/ui/Modal/ModalAuth/ModalAuth";
 import { ModalDeleteTransaction } from "@/components/ui/Modal/ModalDeleteTransaction/ModalDeleteTransaction";
 import { ModalEditSubscription } from "@/components/ui/Modal/ModalEditSubscription/ModalEditSubscription";
+import { ModalEditSetting } from "@/components/ui/Modal/ModalSetting/ModalSetting";
+
 
 const Layout = ({ children }: { children: React.ReactNode}) => {
     return(
@@ -15,6 +17,7 @@ const Layout = ({ children }: { children: React.ReactNode}) => {
                 </main>
             </div>
             <ModalAuth/>
+            <ModalEditSetting/>
             <ModalAddSubscriptionCard/>
             <ModalDeleteTransaction/>
             <ModalEditSubscription/>
