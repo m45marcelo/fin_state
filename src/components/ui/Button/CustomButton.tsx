@@ -9,7 +9,7 @@ interface CustomButtonProps {
 	onClick?: MouseEventHandler<HTMLButtonElement>;
 	title: string;
 	isPrimary: boolean;
-	stylesButton?: string;
+	className?: string;
 	iconButton?: IconType;
 	isLoading?: boolean;
 }
@@ -19,7 +19,7 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
 	onClick,
 	title,
 	isPrimary,
-	stylesButton,
+	className,
 	iconButton,
 	isLoading,
 }) => {
@@ -30,7 +30,7 @@ export const CustomButton: React.FC<CustomButtonProps> = ({
 			onClick={onClick}
 			type={type}
 			disabled={isLoading}
-			className={clsx(stylesButton, {
+			className={clsx(className, {
 				[styles.btn_primary]: isPrimary,
 				[styles.btn_secundary]: isPrimary === false,
 			})}
