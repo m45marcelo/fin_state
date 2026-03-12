@@ -1,6 +1,7 @@
 import { SelectButtonType } from "@/components/ui/Card/CardTableHistoryTransaction/CardTableHistoryTransaction";
 import type { ExpenseCategory } from "./Expense";
 import type { IncomeCategory } from "./Income";
+import { Subscription } from "./Subscription";
 
 export type TransactionsTypes = "income" | "expense" | "subscription";
 
@@ -26,7 +27,7 @@ export interface GetTransactionsRequest {
 }
 
 export interface GetTransactionsResponse {
-	transactions: Transaction[];
+	transactions:  Subscription[];
 	summary: {
 		totalExpenses: number;
 		totalIncomes: number;

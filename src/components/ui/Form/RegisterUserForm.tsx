@@ -12,9 +12,12 @@ import { CustomText } from "../TextComponents/CustomText";
 import { useCreateUserMutation } from "@/store/api/userApi";
 import { MdPersonAdd } from "react-icons/md";
 import { RegisterFormMessage } from "./RegisterFormMessage";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export const RegisterUserForm = () => {
 	const [ createUser, { isLoading, isSuccess, isError }] = useCreateUserMutation();
+	const router = useRouter();
 
 	const {
 		register,
@@ -35,8 +38,10 @@ export const RegisterUserForm = () => {
 
 		try {
 			await createUser(userData).unwrap();
-			console.log("usuario criado")
+			console.log("usuário criado")
+			toast.success("Usuário criado com sucesso! Conecte-se agora")
 			reset()
+			router.replace("/login")
 		} catch (err) {
 			console.error("Erro ao criar usuário:", err);
 		}
@@ -132,7 +137,7 @@ export const RegisterUserForm = () => {
 					{errors.repeatPassword?.message}
 				</span>
 			</div>
-			<CustomButton isLoading={isLoading} iconButton={MdPersonAdd} title="Criar Conta" stylesButton="text-[0.9375rem] h-[2.6875rem] mt-1 bg-indigo-500 hover:bg-indigo-600" type="submit" isPrimary/>
+			<CustomButton isLoading={isLoading} iconButton={MdPersonAdd} title="Criar Conta" className="text-[0.9375rem] h-[2.6875rem] mt-1 bg-indigo-500 hover:bg-indigo-600" type="submit" isPrimary/>
 			<RegisterFormMessage isError={isError} isSuccess={isSuccess}/>
 		</form>
 	);

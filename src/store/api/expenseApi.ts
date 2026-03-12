@@ -22,7 +22,8 @@ export const expenseApi = createApi({
                 url: "/expense",
                 method: "DELETE",
                 body
-            })
+            }),
+            invalidatesTags: ["Expenses", "Transactions"]
         }),
         getAllExpenses: builder.query<GetAllExpensesResponse, void>({
             query: () => ({

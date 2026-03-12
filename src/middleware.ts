@@ -5,11 +5,8 @@ export function middleware(request: NextRequest) {
 	const token = request.cookies.get("token");
 
 	if (token && request.nextUrl.pathname === "/login") {
-
-		console.log("middleware rodou", "token:",token, "path:",request.nextUrl.pathname);
 		return NextResponse.redirect(new URL("/", request.url));
 	}
-	console.log("middleware rodou", "token:",token, "path:",request.nextUrl.pathname);
 	return NextResponse.next();
 }
 

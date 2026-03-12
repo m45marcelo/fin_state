@@ -6,17 +6,22 @@ import {
 } from "react-icons/md";
 import { CardInfo } from "./CardInfo";
 import { useGetAllIncomesQuery } from "@/store/api/incomeApi";
-import { useGetAllExpensesQuery } from "@/store/api/expenseApi";
-import { useGetAllSubscriptionsQuery } from "@/store/api/subscriptionApi";
 import { useGetAllTransactionsByTypeQuery } from "@/store/api/transactionApi";
 
 export const CardInfoWrapper = () => {
     const {data: totalIncomes, isLoading } = useGetAllIncomesQuery();
-    const { data: totalExpense} = useGetAllTransactionsByTypeQuery({
+    const { data: expensesData} = useGetAllTransactionsByTypeQuery({
         type: "expense"
     })
 
-    let currentBalance = (totalIncomes && totalExpense) ? totalIncomes.total - totalExpense.summary.totalExpenses : 0;
+    const expenses = expensesData?.transactions.filter(item => item.status !== "Pendente")
+
+    const totalExpense = expenses?.reduce((acum, item) => {
+        acum += item.value;
+        return acum;
+    }, 0) || 0;
+
+    let currentBalance = (totalIncomes && expensesData) ? totalIncomes.total - totalExpense : 0;
 
     const infoCards = [
         {
@@ -35,7 +40,7 @@ export const CardInfoWrapper = () => {
         },
         {
             title: "Despesas Totais",
-            value: totalExpense?.summary.totalExpenses,
+            value: totalExpense,
             icon: MdReceipt,
             textColor: "text-red-700",
             iconColor: "#ef4444",
@@ -43,7 +48,7 @@ export const CardInfoWrapper = () => {
     ];
 
     return (
-        <div className="w-full grid grid-cols-3 gap-[22px] ">
+        <div className="w-full grid grid-cols-3 gap-[1.375rem] ">
             {
                 infoCards.map((item) => {
                     return (

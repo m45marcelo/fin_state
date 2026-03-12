@@ -12,6 +12,7 @@ import {
 	useGetTransactionByNameQuery,
 } from "@/store/api/transactionApi";
 import { selectDate } from "@/utils/selectDate";
+import { NotTransaction } from "../HistoryTransactionsCard/NotTransaction";
 import type { SelectButtonType } from "./CardTableHistoryTransaction";
 import { HistoryItem } from "./HistoryItem";
 import { PaginationHistory } from "./PaginationHistory";
@@ -27,7 +28,6 @@ export const TableHistoryTransaction = ({
 	type,
 	lastButton,
 }: TableHistoryTransactionProps) => {
-	console.log(lastButton);
 	const [page, setPage] = useState(1);
 	const { data, isLoading } = useGetAllTransactionsQuery({
 		page: page,
@@ -36,10 +36,10 @@ export const TableHistoryTransaction = ({
 	const [transactionsPage, setTransactionsPage] = useState<any>(undefined);
 	let typeTransaction: TransactionsTypes = "expense";
 
-	if(type === "all"){
-		typeTransaction = "income"
-	}else{
-		typeTransaction = type
+	if (type === "all") {
+		typeTransaction = "income";
+	} else {
+		typeTransaction = type;
 	}
 
 	const { data: incomeOurExpense } = useGetAllTransactionsByTypeQuery({
@@ -54,13 +54,15 @@ export const TableHistoryTransaction = ({
 		limit: 10,
 	});
 
-	const { data: transactionsIncome } = useGetIncomeByNameQuery({
+	const { data: incomesByName } = useGetIncomeByNameQuery({
 		description: textInput,
 		page: page,
 		limit: 10,
 	});
 
-	const { data: transactionsExpense } = useGetExpenseByNameQuery({
+	console.log("pesquisa", incomesByName);
+
+	const { data: expensesByName } = useGetExpenseByNameQuery({
 		description: textInput,
 		page: page,
 		limit: 10,
@@ -89,17 +91,82 @@ export const TableHistoryTransaction = ({
 		} else return;
 	};
 
-	const seeAllTransactions =
+	const seeAllTransactionsOnly =
 		type === "all" && !lastButton && textInput.length <= 0;
 
-	const seeAllIncomes =
+	const seeAllIncomesOnly =
 		type === "income" && !lastButton && textInput.length <= 0;
 
-	const seeAllExpenses =
+	const seeAllExpensesOnly =
 		type === "expense" && !lastButton && textInput.length <= 0;
 
-	const seeAllTransactionsByName =
+	const seeAllTransactionsOnlyByName =
 		type === "all" && !lastButton && textInput.length >= 1;
+
+	const seeAllIncomesOnlyByName =
+		type === "income" && !lastButton && textInput.length >= 1;
+
+	const seeAllExpensesOnlyByName =
+		type === "expense" && !lastButton && textInput.length >= 1;
+
+	if (isLoading) {
+		return (
+			<>
+				<table className="w-full max-w-[52.6875rem] border-collapse">
+					<thead>
+						<tr>
+							<th className="w-full max-w-28 text-[0.6875rem] px-[1.375rem] py-[0.625rem] font-bold text-left text-gray-800">
+								DESCRIÇÃO
+							</th>
+							<th className="text-[0.6875rem] px-[1.375rem] py-[0.625rem] font-bold text-left text-gray-800">
+								CATEGORIA
+							</th>
+							<th className="text-[0.6875rem] px-[1.375rem] py-[0.625rem] font-bold text-right text-gray-800">
+								VALOR
+							</th>
+							<th className="text-[0.6875rem] px-[1.375rem] py-[0.625rem] font-bold text-right text-gray-800">
+								AÇÕES
+							</th>
+						</tr>
+					</thead>
+				</table>
+				{isLoading &&
+					[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
+						<div key={item} className="w-full">
+							<Skeleton height={66} width={"100%"} />
+						</div>
+					))}
+			</>
+		);
+	}
+
+	if (data) {
+		if (data.transactions.length <= 0) {
+			return (
+				<>
+					<table className="w-full max-w-[52.6875rem] border-collapse">
+						<thead>
+							<tr>
+								<th className="w-full max-w-28 text-[0.6875rem] px-[1.375rem] py-[0.625rem] font-bold text-left text-gray-800">
+									DESCRIÇÃO
+								</th>
+								<th className="text-[0.6875rem] px-[1.375rem] py-[0.625rem] font-bold text-left text-gray-800">
+									CATEGORIA
+								</th>
+								<th className="text-[0.6875rem] px-[1.375rem] py-[0.625rem] font-bold text-right text-gray-800">
+									VALOR
+								</th>
+								<th className="text-[0.6875rem] px-[1.375rem] py-[0.625rem] font-bold text-right text-gray-800">
+									AÇÕES
+								</th>
+							</tr>
+						</thead>
+					</table>
+					<NotTransaction />
+				</>
+			);
+		}
+	}
 
 	return (
 		<>
@@ -121,18 +188,7 @@ export const TableHistoryTransaction = ({
 					</tr>
 				</thead>
 				<tbody>
-					{isLoading &&
-						[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
-							<tr key={item}>
-								<td>
-									<div className="w-full">
-										<Skeleton height={66} width={"100%"} />
-									</div>
-								</td>
-							</tr>
-						))}
-
-					{/* {seeAllTransactions &&
+					{seeAllTransactionsOnly &&
 						data?.transactions.map((item) => (
 							<HistoryItem
 								key={item.id}
@@ -143,7 +199,7 @@ export const TableHistoryTransaction = ({
 								value={item.value}
 							/>
 						))}
-						{seeAllIncomes &&
+					{seeAllIncomesOnly &&
 						incomeOurExpense?.transactions.map((item) => (
 							<HistoryItem
 								key={item.id}
@@ -154,7 +210,7 @@ export const TableHistoryTransaction = ({
 								value={item.value}
 							/>
 						))}
-						{seeAllExpenses &&
+					{seeAllExpensesOnly &&
 						incomeOurExpense?.transactions.map((item) => (
 							<HistoryItem
 								key={item.id}
@@ -164,9 +220,31 @@ export const TableHistoryTransaction = ({
 								date={item.createdAt}
 								value={item.value}
 							/>
-						))} */}
-						{seeAllTransactionsByName &&
+						))}
+					{seeAllTransactionsOnlyByName &&
 						transactionsByName?.transactions.map((item) => (
+							<HistoryItem
+								key={item.id}
+								description={item.description}
+								type={item.type}
+								category={item.category}
+								date={item.createdAt}
+								value={item.value}
+							/>
+						))}
+					{seeAllIncomesOnlyByName &&
+						incomesByName?.incomes.map((item) => (
+							<HistoryItem
+								key={item.id}
+								description={item.description}
+								type={item.type}
+								category={item.category}
+								date={item.createdAt}
+								value={item.value}
+							/>
+						))}
+					{seeAllExpensesOnlyByName &&
+						expensesByName?.expenses.map((item) => (
 							<HistoryItem
 								key={item.id}
 								description={item.description}
@@ -178,8 +256,9 @@ export const TableHistoryTransaction = ({
 						))}
 				</tbody>
 			</table>
+
 			<div className="bg-white flex items-center w-full h-[3.75rem]">
-				{data && seeAllTransactions && (
+				{data && seeAllTransactionsOnly && (
 					<PaginationHistory
 						itemsPerPage={data.pagination.itemsPerPage}
 						totalItems={data.pagination.totalItems}
@@ -188,7 +267,7 @@ export const TableHistoryTransaction = ({
 						totalPages={data.pagination.totalPages}
 					/>
 				)}
-				{incomeOurExpense && seeAllIncomes &&(
+				{incomeOurExpense && seeAllIncomesOnly && (
 					<PaginationHistory
 						itemsPerPage={incomeOurExpense.pagination.itemsPerPage}
 						totalItems={incomeOurExpense.pagination.totalItems}
@@ -197,7 +276,7 @@ export const TableHistoryTransaction = ({
 						totalPages={incomeOurExpense.pagination.totalPages}
 					/>
 				)}
-				{incomeOurExpense && seeAllExpenses &&(
+				{incomeOurExpense && seeAllExpensesOnly && (
 					<PaginationHistory
 						itemsPerPage={incomeOurExpense.pagination.itemsPerPage}
 						totalItems={incomeOurExpense.pagination.totalItems}
@@ -206,13 +285,31 @@ export const TableHistoryTransaction = ({
 						totalPages={incomeOurExpense.pagination.totalPages}
 					/>
 				)}
-				{seeAllTransactionsByName && transactionsByName &&(
+				{transactionsByName && seeAllTransactionsOnlyByName && (
 					<PaginationHistory
 						itemsPerPage={transactionsByName.pagination.itemsPerPage}
 						totalItems={transactionsByName.pagination.totalItems}
 						changePage={handleChangePage}
 						currentPage={transactionsByName.pagination.currentPage}
 						totalPages={transactionsByName.pagination.totalPages}
+					/>
+				)}
+				{incomesByName && seeAllIncomesOnlyByName && (
+					<PaginationHistory
+						itemsPerPage={incomesByName.pagination.itemsPerPage}
+						totalItems={incomesByName.pagination.totalItems}
+						changePage={handleChangePage}
+						currentPage={incomesByName.pagination.currentPage}
+						totalPages={incomesByName.pagination.totalPages}
+					/>
+				)}
+				{expensesByName && seeAllExpensesOnlyByName && (
+					<PaginationHistory
+						itemsPerPage={expensesByName.pagination.itemsPerPage}
+						totalItems={expensesByName.pagination.totalItems}
+						changePage={handleChangePage}
+						currentPage={expensesByName.pagination.currentPage}
+						totalPages={expensesByName.pagination.totalPages}
 					/>
 				)}
 			</div>

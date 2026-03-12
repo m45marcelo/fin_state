@@ -55,6 +55,8 @@ export const AddIncomeForm = () => {
 				console.error("Erro ao tentar criar uma receita:", err);
 				toast.error("Ocorreu um erro ao tentar criar uma nova receita");
 			}
+		}else{
+			dispatch(openModal("authUser"))
 		}
 	}
 
@@ -159,11 +161,11 @@ export const AddIncomeForm = () => {
 			</div>
 			<CustomButton
 				type="submit"
-				title="Adicionar Receita"
 				onClick={() => dispatch(openModal("authUser"))}
+				title="Adicionar Receita"
 				isPrimary
 				isLoading={isLoading}
-				stylesButton="text-[0.8125rem] h-[2.375rem] line-height:20px bg-indigo-500 hover:bg-indigo-600"
+				className="text-[0.8125rem] h-[2.375rem] line-height:20px bg-indigo-500 hover:bg-indigo-600"
 				iconButton={MdAdd}
 			/>
 		</form>

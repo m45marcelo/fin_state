@@ -47,7 +47,7 @@ const Transacoes = () => {
 	};
 
 	return (
-		<div className="flex flex-col w-full  relative ">
+		<div className="flex flex-col w-full relative ">
 			<MultipleCalendar closeCalendar={()=> setStateButton4(false)} className={stateButton4 ? "absolute z-10 w-[600px] left-[450px] bg-white border border-gray-300" : "absolute z-10 w-[600px] hidden left-[450px] bg-white border border-gray-300"}/>
 			<div className="flex justify-between w-full mb-[1.3125rem]">
 				<div className="flex gap-[0.4375rem] z-10">
@@ -76,7 +76,7 @@ const Transacoes = () => {
 				</div>
 
 				<CustomButton
-					stylesButton="bg-indigo-500 hover:bg-indigo-600 text-[0.9375rem]"
+					className="bg-indigo-500 hover:bg-indigo-600 text-[0.9375rem]"
 					isPrimary
 					type="button"
 					title="Nova Transição"
@@ -86,8 +86,8 @@ const Transacoes = () => {
 			<div className="flex w-full justify-between">
 				<CardTableHistoryTransaction lastButton={lastButton} />
 				<div className="flex flex-col gap-[1.375rem]">
-					<ChartCard chart={<IncomeChart />} />
-					<ChartCard chart={<ExpenseChart />} />
+					<ChartCard chartType="income" chart={<IncomeChart />} />
+					<ChartCard chartType="expense" chart={<ExpenseChart />} />
 				</div>
 			</div>
 			

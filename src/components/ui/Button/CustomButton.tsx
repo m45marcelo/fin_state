@@ -9,7 +9,7 @@ interface CustomButtonProps {
 	onClick?: MouseEventHandler<HTMLButtonElement>;
 	title: string;
 	isPrimary: boolean;
-	className?: string;
+ 	className?: string;
 	iconButton?: IconType;
 	isLoading?: boolean;
 }

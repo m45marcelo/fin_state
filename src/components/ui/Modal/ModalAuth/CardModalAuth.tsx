@@ -13,10 +13,10 @@ export const CardModalAuth = () => {
 			<div className="h-16 w-16 mb-4 rounded-full bg-indigo-100 flex items-center justify-center">
 				<MdLock className="text-[30px] text-indigo-600" />
 			</div>
-			<CustomText className="text-[1.125rem] mb-4 text-gray-900 font-semibold mb-[0.625rem]">
+			<CustomText className="text-[1.125rem] mb-4 text-gray-900 font-semibold">
 				Faça Login
 			</CustomText>
-			<CustomText className="text-xs mb-6 font-medium text-gray-500 text-center max-w-[21.25rem] mb-6">
+			<CustomText className="text-xs font-medium text-gray-500 text-center max-w-[21.25rem] mb-6">
 				Você precisa estar logado para acessar esta funcionalidade e salvar seus
 				dados.
 			</CustomText>
@@ -26,7 +26,7 @@ export const CardModalAuth = () => {
                     iconButton={MdOutlineLogin}
                     type="submit"
                     title="Entrar na Conta"
-                    stylesButton="text-[0.9375rem] h-[2.375rem] w-full bg-indigo-500 hover:bg-indigo-600 mb-3"
+                    className="text-[0.9375rem] h-[2.375rem] w-full bg-indigo-500 hover:bg-indigo-600 mb-3"
                     isPrimary
                 />
             </Link>
@@ -35,7 +35,7 @@ export const CardModalAuth = () => {
                 <CustomButton
                     type="button"
                     title="Criar Conta"
-                    stylesButton="text-[0.9375rem] h-[2.375rem] w-full bg-gray-200 hover:bg-gray-300 text-gray-800"
+                    className="text-[0.9375rem] h-[2.375rem] w-full bg-gray-200 hover:bg-gray-300 text-gray-800"
                     isPrimary={false}
                     
                 />

@@ -217,7 +217,7 @@ export const CardModalAddSubscription = () => {
 					<CustomButton
 						type="button"
 						title="Cancelar"
-						stylesButton="h-[2.375rem] text-[0.9375rem] bg-indigo-500 hover:bg-indigo-600"
+						className="h-[2.375rem] text-[0.9375rem] bg-indigo-500 hover:bg-indigo-600"
 						isPrimary={false}
 						onClick={() => {
 							dispatch(closeModal());
@@ -228,7 +228,7 @@ export const CardModalAddSubscription = () => {
 						type="submit"
 						isLoading={isLoading}
 						title="Adicionar Assinatura"
-						stylesButton="h-[2.375rem] text-[0.9375rem] bg-indigo-500 hover:bg-indigo-600"
+						className="h-[2.375rem] text-[0.9375rem] bg-indigo-500 hover:bg-indigo-600"
 						isPrimary
 					/>
 				</div>

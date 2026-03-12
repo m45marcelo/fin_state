@@ -1,6 +1,8 @@
+"use client";
 import clsx from "clsx";
 import type { IconType } from "react-icons";
 import Skeleton from "react-loading-skeleton";
+import { useGetMeQuery } from "@/store/api/userApi";
 import { formatCurrency } from "@/utils/formatCurrency";
 
 interface CardInfoProps {
@@ -20,7 +22,9 @@ export const CardInfo: React.FC<CardInfoProps> = ({
 	iconColor,
 	isLoading,
 }) => {
+	const { data } = useGetMeQuery();
 	const ItemIcon = icon;
+
 	return (
 		<>
 			{isLoading ? (
@@ -37,7 +41,7 @@ export const CardInfo: React.FC<CardInfoProps> = ({
 						<ItemIcon size={22} color={iconColor} />
 					</header>
 					<span className={clsx("text-text-value-card font-medium", textColor)}>
-						{formatCurrency(value)}
+						{data ? formatCurrency(value) : "R$ --,--"}
 					</span>
 				</div>
 			)}

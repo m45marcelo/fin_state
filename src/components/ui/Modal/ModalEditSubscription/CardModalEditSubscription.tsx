@@ -57,14 +57,14 @@ export const CardModalEditSubscription = () => {
 
 	async function onSubmit(data: UpdateSubscriptionTypeSchema){
 		if(selectedSubscription){
-			const subscriptionDate = {
+			const subscriptionData = {
 				id: selectedSubscription.id,
 				status: selectedSubscription.status,
 				...data
 			}
 
 			try {
-				await updateSubscription(subscriptionDate).unwrap();
+				await updateSubscription(subscriptionData).unwrap();
 				toast.success("Transação editada com sucesso")
 
 			} catch (err) {
@@ -86,7 +86,7 @@ export const CardModalEditSubscription = () => {
 	if (!selectedSubscription) return null;
 
 	return (
-		<div className="h-[470px] w-full max-w-[28.75rem] py-[1.375rem] px-[1.375rem] rounded-2xl bg-white">
+		<div className="h-[29.375rem] w-full max-w-[28.75rem] py-[1.375rem] px-[1.375rem] rounded-2xl bg-white">
 			<div className="flex justify-between items-center text-center mb-[20px]">
 				<TitleCardH2 className="font-semibold text-lg">
 					Editar Assinatura
@@ -269,13 +269,13 @@ export const CardModalEditSubscription = () => {
 							dispatch(closeModal());
 							reset();
 						}}
-						stylesButton="text-[0.9375rem] h-[2.375rem] bg-gray-200 hover:bg-gray-300 text-gray-800"
+						className="text-[0.9375rem] h-[2.375rem] bg-gray-200 hover:bg-gray-300 text-gray-800"
 						isPrimary={false}
 					/>
 					<CustomButton
 						type="submit"
 						title="Salvar Alterações"
-						stylesButton="text-[0.9375rem] h-[2.375rem] bg-indigo-500 hover:bg-indigo-600"
+						className="text-[0.9375rem] h-[2.375rem] bg-indigo-500 hover:bg-indigo-600"
 						isPrimary
 					/>
 				</div>

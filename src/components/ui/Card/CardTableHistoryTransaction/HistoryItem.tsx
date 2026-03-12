@@ -14,6 +14,7 @@ interface HistoryItemProps{
 }
 
 export const HistoryItem = ({description, date, category, type, value}: HistoryItemProps) => {
+	
 	return (
 		<tr className="h-[4.125rem]">
 			<td className="px-[1.375rem]  h-[3.9375rem]">

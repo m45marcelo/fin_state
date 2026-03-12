@@ -3,9 +3,19 @@
 import { Pie } from "react-chartjs-2";
 import { useGetDashboardQuery } from "@/store/api/dashboardApi";
 import { ChartLegend } from "./ChartLegend";
+import Skeleton from "react-loading-skeleton";
+import { useEffect, useState } from "react";
 
 export const ExpenseChart = () => {
-	const { data: expense } = useGetDashboardQuery();
+	const { data: expense, isLoading } = useGetDashboardQuery();
+
+	const [loading, setLoading] = useState(true);
+
+		useEffect(() => {
+			setTimeout(() => {
+				setLoading(false);
+			}, 1000);
+		}, []);
 	const labels = [
 		"Supermercado",
 		"Moradia",
@@ -71,7 +81,19 @@ export const ExpenseChart = () => {
 		}));
 
 		return (
-			<div className="w-full flex flex-col items-center justify-center mt-3">
+			loading ? (
+				<div className="w-full flex flex-col items-center justify-center mt-3">
+				<div className="max-w-[14.25rem]">
+					
+					<Skeleton height={228} width={228}/>
+					
+				</div>
+				<div className="flex w-full justify-start">
+					<ChartLegend items={legendItems} />
+				</div>
+			</div>
+			):(
+				<div className="w-full flex flex-col items-center justify-center mt-3">
 				<div className="max-w-[14.25rem]">
 					<Pie
 						data={data}
@@ -86,6 +108,7 @@ export const ExpenseChart = () => {
 					<ChartLegend items={legendItems} />
 				</div>
 			</div>
+			)
 		);
 	}
 };

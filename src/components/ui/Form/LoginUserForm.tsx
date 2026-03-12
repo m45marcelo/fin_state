@@ -16,11 +16,14 @@ import {  useState } from "react";
 import { LoginFormMessage } from "./LoginFormMessage";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { useAppDispatch } from "@/hooks";
+import { closeModal } from "@/store/slices/modalSlice";
 export const LoginUserForm = () => {
 	const [authUser, { isSuccess, isLoading, isError }] = useAuthUserMutation();
 
     const [backendError, setBackendError] = useState("");
 	const router = useRouter();
+	const dispatch = useAppDispatch();
 
 	const {
 		register,
@@ -37,6 +40,7 @@ export const LoginUserForm = () => {
 			reset();
 			setBackendError("")
 			toast.success("Login realizado com sucesso")
+			dispatch(closeModal())
 			router.replace("/")
 		} catch (err: any) {
             setBackendError(err.data?.message)
@@ -95,7 +99,7 @@ export const LoginUserForm = () => {
                     }
 				</span>
 			</div>
-            <CustomButton isLoading={isLoading}  iconButton={MdOutlineLogin} title="Entrar" stylesButton="text-[0.9375rem] mt-1 h-[2.6875rem] bg-indigo-500 hover:bg-indigo-600" type="submit" isPrimary/>
+            <CustomButton isLoading={isLoading}  iconButton={MdOutlineLogin} title="Entrar" className="text-[0.9375rem] mt-1 h-[2.6875rem] bg-indigo-500 hover:bg-indigo-600" type="submit" isPrimary/>
             <LoginFormMessage isSuccess={isSuccess}/>
 		</form>
 	);

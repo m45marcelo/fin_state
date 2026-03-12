@@ -13,7 +13,7 @@ export const CardModalDeleteTransaction = () => {
 	const dispatch = useAppDispatch();
 
 	const selectedTransaction = useAppSelector(
-		(state) => state.selectedSubscription.subscription
+		(state) => state.selectedSubscription.transaction
 	);
 
 	if (!selectedTransaction) return null;
@@ -52,14 +52,14 @@ export const CardModalDeleteTransaction = () => {
 			<div className="flex w-full justify-between">
 				<CustomButton
 					onClick={() => dispatch(closeModal())}
-					stylesButton="h-[2.5rem] w-[10.875rem] text-[0.875rem]"
+					className="h-[2.5rem] w-[10.875rem] text-[0.875rem]"
 					type="button"
 					title="Cancelar"
 					isPrimary={false}
 				/>
 				<CustomButton
 					onClick={handleDeleteSubscription}
-					stylesButton="h-[2.5rem] w-[10.875rem] text-[0.875rem] bg-red-500 hover:bg-red-600"
+					className="h-[2.5rem] w-[10.875rem] text-[0.875rem] bg-red-500 hover:bg-red-600"
 					type="button"
 					title="Excluir"
 					isPrimary

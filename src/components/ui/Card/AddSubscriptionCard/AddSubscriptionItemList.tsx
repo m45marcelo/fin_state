@@ -17,9 +17,11 @@ import {
 } from "react-icons/md";
 import type { Subscription } from "@/domain/entities/Subscription";
 import { useAppDispatch } from "@/hooks";
-import { useDeleteSubscriptionMutation, useUpdateSubscriptionMutation } from "@/store/api/subscriptionApi";
+import {
+	useUpdateSubscriptionMutation,
+} from "@/store/api/subscriptionApi";
 import { openModal } from "@/store/slices/modalSlice";
-import { setSelectedSubscription } from "@/store/slices/selectedSubscriptionSlice";
+import { setSelectedTransaction } from "@/store/slices/selectedTransactionSlice";
 import type { StatusSubscription } from "@/types";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { CustomText } from "../../TextComponents/CustomText";
@@ -47,7 +49,7 @@ export const AddSubscriptionItemList: React.FC<
 			}).unwrap();
 
 			dispatch(
-				setSelectedSubscription({
+				setSelectedTransaction({
 					...subscription,
 					status: newStatus,
 				}),
@@ -61,14 +63,14 @@ export const AddSubscriptionItemList: React.FC<
 	}
 
 	function handleChangeModal() {
-		dispatch(setSelectedSubscription(subscription));
-		dispatch(openModal("editSubscription"));
+		dispatch(setSelectedTransaction(subscription));
+		dispatch(openModal("editTransaction"));
 	}
 
 	function handleDeleteSubscription() {
 		dispatch(openModal("deleteTransaction"));
 		dispatch(
-			setSelectedSubscription({
+			setSelectedTransaction({
 				...subscription,
 				type: "subscription",
 			}),
@@ -96,8 +98,8 @@ export const AddSubscriptionItemList: React.FC<
 		);
 
 	return (
-		<li className="h-[5.625rem] p-[0.625rem] w-full bg-gray-50 rounded-lg flex items-center">
-			<div className="w-full flex justify-between">
+		<li className="h-[80px] px-[0.625rem] w-full bg-gray-50 rounded-lg flex items-center">
+			<div className="w-full h-full flex justify-between">
 				<div className="flex items-center">
 					<div
 						className={clsx(

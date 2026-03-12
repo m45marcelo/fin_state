@@ -176,7 +176,7 @@ export const AddExpenseForm = () => {
 					title="Adicionar Despesa"
 					isLoading={isLoading}
 					isPrimary
-					stylesButton="text-[0.8125rem] h-[38px] line-height: 1.25rem bg-indigo-500 hover:bg-indigo-600"
+					className="text-[0.8125rem] h-[38px] line-height: 1.25rem bg-indigo-500 hover:bg-indigo-600"
 					iconButton={MdAdd}
 				/>
 			) : (
@@ -186,7 +186,7 @@ export const AddExpenseForm = () => {
 					title="Adicionar Despesa"
 					isLoading={isLoading}
 					isPrimary
-					stylesButton="text-[0.8125rem] h-[38px] line-height: 1.25rem bg-indigo-500 hover:bg-indigo-600"
+					className="text-[0.8125rem] h-[38px] line-height: 1.25rem bg-indigo-500 hover:bg-indigo-600"
 					iconButton={MdAdd}
 				/>
 			)}

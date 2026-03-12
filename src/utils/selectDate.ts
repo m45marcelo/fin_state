@@ -93,8 +93,6 @@ export const selectDate = (option: number | undefined): SelectDateResponse => {
             59,
             999,
         ).toISOString()
-
-        console.log(startDate)
     }
 
     if(option === 3){
@@ -123,8 +121,6 @@ export const selectDate = (option: number | undefined): SelectDateResponse => {
         if(date){
             startDate = `${date[0]}T03:00:00.000Z`
             endDate =  `${date[1]}T03:00:00.000Z`
-
-            console.log("Start:", startDate, "End:", endDate)
         }
     }
 

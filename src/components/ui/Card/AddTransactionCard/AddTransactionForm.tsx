@@ -118,7 +118,7 @@ export const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
 						type="submit"
 						title="Adicionar Receita"
 						isPrimary
-						stylesButton="text-[0.8125rem] h-[2.375rem] line-height:20px bg-indigo-500 hover:bg-indigo-600"
+						className="text-[0.8125rem] h-[2.375rem] line-height:20px bg-indigo-500 hover:bg-indigo-600"
 						iconButton={MdAdd}
 					/>
 				</>
@@ -197,7 +197,7 @@ export const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
 						type="submit"
 						title="Adicionar Despesa"
 						isPrimary
-						stylesButton="text-[0.8125rem] h-[38px] line-height: 1.25rem bg-indigo-500 hover:bg-indigo-600"
+						className="text-[0.8125rem] h-[38px] line-height: 1.25rem bg-indigo-500 hover:bg-indigo-600"
 						iconButton={MdAdd}
 					/>
 				</>

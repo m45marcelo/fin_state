@@ -5,11 +5,12 @@ import { ButtonHistoryTransaction } from "../../Button/ButtonHistoryTransaction"
 import { TitleCardH2 } from "../../TextComponents/TittleCardH2";
 import { ButtonsContainer } from "../AddTransactionCard/ButtonsContainer";
 import { TableHistoryTransaction } from "./TableHistoryTransactions";
-import { TransactionsTypes } from "@/domain/entities/Transaction";
+
 import { MdSearch } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { SearchTransactionTypeSchema, searchTransactionValidateSchema } from "@/validators/transaction/searchTransactionValidateSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useGetAllExpensesQuery } from "@/store/api/expenseApi";
 
 interface CardTableHistoryTransactionProps{
 	lastButton: number | undefined;
@@ -21,6 +22,8 @@ export const CardTableHistoryTransaction = ({lastButton}: CardTableHistoryTransa
 	const {handleSubmit, register } = useForm<SearchTransactionTypeSchema>({
 		resolver: zodResolver(searchTransactionValidateSchema)
 	})
+
+	const { isLoading } = useGetAllExpensesQuery()
 
 	const [stateButton1, setStateButton1] = useState(true);
 	const [stateButton2, setStateButton2] = useState(false);
